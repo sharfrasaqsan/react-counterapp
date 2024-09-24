@@ -1,4 +1,3 @@
-/* App Container */
 * {
   margin: 0;
   padding: 0;
@@ -6,6 +5,7 @@
   font-family: "Poppins", sans-serif;
 }
 
+/* App Container */
 .app-container {
   display: flex;
   justify-content: center;
@@ -28,12 +28,14 @@
   width: 100%;
 }
 
+/* Title */
 .counter-title {
   font-size: 2rem;
   color: #333333; /* Dark color for title */
   margin-bottom: 1rem;
 }
 
+/* Display */
 .count-display {
   font-size: 4rem;
   color: #282c34; /* Dark color for the count */
@@ -41,12 +43,14 @@
   font-weight: bold;
 }
 
+/* Button Group */
 .button-group {
   display: flex;
   justify-content: center;
   gap: 1rem;
 }
 
+/* Buttons */
 .button {
   padding: 0.75rem 1.5rem;
   font-size: 1rem;
@@ -77,6 +81,36 @@
   transform: translateY(0);
 }
 
+/* Initial Value Section */
+.initial-value-section {
+  margin-bottom: 1.5rem;
+}
+
+.initial-value-section input {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  width: 60%;
+  max-width: 200px;
+}
+
+.initial-value-section button.set-initial {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  background: #ff9800; /* Orange for setting initial value */
+  border: none;
+  border-radius: 8px;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.initial-value-section button.set-initial:hover {
+  background: #f57c00; /* Darker orange on hover */
+}
+
 @media (max-width: 768px) {
   .counter-card {
     padding: 1.5rem;
@@ -92,6 +126,14 @@
 
   .button {
     padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
+
+  .initial-value-section input {
+    width: 80%;
+  }
+
+  .initial-value-section button.set-initial {
     font-size: 0.875rem;
   }
 }
