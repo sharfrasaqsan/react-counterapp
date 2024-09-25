@@ -4,31 +4,50 @@ import "./App.css";
 const App = () => {
   const [count, setCount] = useState(0);
   const [initialValue, setInitialValue] = useState(0);
+  const [history, setHistory] = useState([]);
 
   const setInitial = () => {
-    const initialValueInt = parseInt(initialValue);
-    if (initialValueInt === "") return;
-    setCount(initialValueInt);
+    if (isNaN(+initialValue)) return;
+    setCount(+initialValue);
+    addToHistory(+initialValue);
   };
 
   const increment = () => {
-    setCount((count) => count + 1);
+    const newCount = count + 1;
+    setCount(newCount);
+    addToHistory(newCount);
   };
 
   const decrement = () => {
-    setCount((count) => count - 1);
+    const newCount = count - 1;
+    setCount(newCount);
+    addToHistory(newCount);
   };
 
   const reset = () => {
-    setCount(0);
+    const confirmReset = window.confirm(
+      "Are you sure you want to reset the counter?"
+    );
+    if (confirmReset) {
+      setCount(0);
+      setHistory([]);
+    }
+  };
+
+  const addToHistory = (newCount) => {
+    const newHistory = [...history, newCount];
+    setHistory(newHistory);
   };
 
   return (
     <div className="app-container">
       <div className="counter-card">
-        <h1 className="counter-title"> React Counter App</h1>
+        <h1 className="counter-title">React Counter App</h1>
 
-        <div className="initial-value-section">
+        <form
+          className="initial-value-section"
+          onSubmit={(e) => e.preventDefault()}
+        >
           <input
             type="number"
             placeholder="Enter initial value"
@@ -38,7 +57,7 @@ const App = () => {
           <button className="button set-initial" onClick={setInitial}>
             Set Initial Value
           </button>
-        </div>
+        </form>
 
         <div className="count-display">{count}</div>
         <div className="button-group">
@@ -51,6 +70,15 @@ const App = () => {
           <button className="button reset" onClick={reset}>
             Reset
           </button>
+        </div>
+
+        <div className="history-section">
+          <h2>History</h2>
+          <ul className="history-list">
+            {history.map((value, index) => (
+              <span key={index}>{value}, </span>
+            ))}
+          </ul>
         </div>
       </div>
     </div>
