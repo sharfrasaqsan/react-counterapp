@@ -111,6 +111,27 @@
   background: #f57c00; /* Darker orange on hover */
 }
 
+/* History Section */
+.history-section {
+  margin-top: 2rem;
+}
+
+.history-section h2 {
+  font-size: 1.5rem;
+  color: #333333;
+  margin-bottom: 1rem;
+}
+
+.history-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.history-list li {
+  margin-bottom: 0.5rem;
+  color: #282c34;
+}
+
 @media (max-width: 768px) {
   .counter-card {
     padding: 1.5rem;
@@ -136,25 +157,4 @@
   .initial-value-section button.set-initial {
     font-size: 0.875rem;
   }
-}
-
-/* History Section */
-.history-section {
-  margin-top: 2rem;
-}
-
-.history-section h2 {
-  font-size: 1.5rem;
-  color: #333333;
-  margin-bottom: 1rem;
-}
-
-.history-list {
-  list-style-type: none;
-  padding: 0;
-}
-
-.history-list li {
-  margin-bottom: 0.5rem;
-  color: #282c34;
 }

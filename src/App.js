@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 
 const App = () => {
@@ -6,22 +6,62 @@ const App = () => {
   const [initialValue, setInitialValue] = useState(0);
   const [history, setHistory] = useState([]);
 
+  useEffect(() => {
+    const initialValue = localStorage.getItem("initialValue");
+    if (initialValue) {
+      setCount(+initialValue);
+      setInitialValue(+initialValue);
+    }
+  }, []);
+
+  // Keyboard shortcuts effect
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      switch (event.key) {
+        case "+":
+        case "ArrowUp":
+          increment();
+          break;
+        case "-":
+        case "ArrowDown":
+          decrement();
+          break;
+        case "r":
+        case "R":
+          reset();
+          break;
+        default:
+          break;
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    // Cleanup the event listener on component unmount
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [count, history]);
+
   const setInitial = () => {
     if (isNaN(+initialValue)) return;
     setCount(+initialValue);
     addToHistory(+initialValue);
+    localStorage.setItem("initialValue", initialValue);
   };
 
   const increment = () => {
     const newCount = count + 1;
     setCount(newCount);
     addToHistory(newCount);
+    localStorage.setItem("initialValue", newCount);
   };
 
   const decrement = () => {
     const newCount = count - 1;
     setCount(newCount);
     addToHistory(newCount);
+    localStorage.setItem("initialValue", newCount);
   };
 
   const reset = () => {
@@ -32,6 +72,7 @@ const App = () => {
       setCount(0);
       setHistory([]);
     }
+    localStorage.setItem("initialValue", 0);
   };
 
   const addToHistory = (newCount) => {
